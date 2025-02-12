@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       {/* Banner page */}
-      <div>
+      <div className="mt-4">
         <Banear />
       </div>
     </div>
