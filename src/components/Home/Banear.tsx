@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import img from "/public/Image.png"
+import Link from "next/link";
 
 const Banear = () => {
   const { theme } = useTheme();
   const isDarkMode = theme ? theme === "dark" : false;
 
   const handleDownload = () => {
-   
+
     const fileUrl = "/resume.pdf";
     const fileName = "resume";
 
@@ -22,7 +23,7 @@ const Banear = () => {
     document.body.appendChild(link);
     link.click();
 
- 
+
     document.body.removeChild(link);
   };
 
@@ -60,7 +61,8 @@ const Banear = () => {
             </p>
             <div className="flex w-96 justify-between mx-auto">
               <div>
-                <motion.button
+                <Link href="/contact" ><motion.button
+
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className={`mt-6 px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow-md ${isDarkMode
@@ -69,7 +71,7 @@ const Banear = () => {
                     }`}
                 >
                   Contact Me
-                </motion.button>
+                </motion.button></Link>
               </div>
               <div>
                 <motion.button
