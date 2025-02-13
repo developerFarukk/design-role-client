@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useTheme } from "next-themes"; 
 import { FaSun, FaMoon } from "react-icons/fa"; 
+import iconss from "../../app/favicon.ico"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false); 
@@ -20,12 +21,12 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
-      <div className="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+    <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900 rounded-2xl">
+      <div className="flex flex-wrap items-center justify-between px-4 mx-auto">
         
         <Link href="/" className="flex items-center">
           <Image
-            src="https://www.svgrepo.com/show/499962/music.svg"
+            src={iconss}
             width={36}
             height={36}
             alt="PortfolioRole"
@@ -56,10 +57,8 @@ const Navbar = () => {
             {[
               { href: "/", label: "Home" },
               { href: "/projects", label: "Projects" },
-              { href: "/marketplace", label: "Marketplace" },
-              { href: "/features", label: "Features" },
-              { href: "/team", label: "Team" },
-              { href: "/contact", label: "Contact" },
+              { href: "/blog", label: "Blogs" },
+              { href: "/contact", label: "contact" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link

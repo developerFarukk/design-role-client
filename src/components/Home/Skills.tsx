@@ -21,7 +21,7 @@ import tailwind from "/public/skillsicon/Tailwind CSS.svg";
 const Skills = () => {
     return (
         <div>
-            <div className="text-center text-3xl p-4">
+            <div className="text-center text-3xl font-bold p-4">
                 <h2>My Skills</h2>
             </div>
             <div className="flex flex-wrap justify-center">

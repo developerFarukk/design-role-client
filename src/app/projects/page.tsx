@@ -2,7 +2,7 @@ import Projects from "@/components/Home/Projects";
 
 
 
-const page = () => {
+const ProjectsPage = () => {
 
     return (
         <div>
@@ -14,4 +14,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ProjectsPage;
