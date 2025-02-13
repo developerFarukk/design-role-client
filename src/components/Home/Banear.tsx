@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import img from "../../../../public/Image.png"
+import img from "/public/Image.png"
 
 const Banear = () => {
   const { theme } = useTheme();

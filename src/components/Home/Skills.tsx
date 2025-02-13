@@ -5,18 +5,18 @@
 "use client"
 
 import Image from "next/image";
-import html from "../../../../public/skillsicon/html-5.png";
-import css from "../../../../public/skillsicon/css-3.png";
-import js from "../../../../public/skillsicon/js.png";
-import ts from "../../../../public/skillsicon/typescript.png";
-import axios from "../../../../public/skillsicon/Axios.svg";
-import express from "../../../../public/skillsicon/Express.svg";
-import firebase from "../../../../public/skillsicon/Firebase.svg";
-import mongoDB from "../../../../public/skillsicon/MongoDB.svg";
-import next from "../../../../public/skillsicon/Next.js.svg";
-import node from "../../../../public/skillsicon/Node.js.svg";
-import react from "../../../../public/skillsicon/React.svg";
-import tailwind from "../../../../public/skillsicon/Tailwind CSS.svg";
+import html from "/public/skillsicon/html-5.png";
+import css from "/public/skillsicon/css-3.png";
+import js from "/public/skillsicon/js.png";
+import ts from "/public/skillsicon/typescript.png";
+import axios from "/public/skillsicon/Axios.svg";
+import express from "/public/skillsicon/Express.svg";
+import firebase from "/public/skillsicon/Firebase.svg";
+import mongoDB from "/public/skillsicon/MongoDB.svg";
+import next from "/public/skillsicon/Next.js.svg";
+import node from "/public/skillsicon/Node.js.svg";
+import react from "/public/skillsicon/React.svg";
+import tailwind from "/public/skillsicon/Tailwind CSS.svg";
 
 const Skills = () => {
     return (

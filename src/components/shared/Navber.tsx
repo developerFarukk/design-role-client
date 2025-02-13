@@ -55,7 +55,7 @@ const Navbar = () => {
           <ul className="flex flex-col mt-4 lg:flex-row lg:space-x-8 lg:mt-0">
             {[
               { href: "/", label: "Home" },
-              { href: "/company", label: "Company" },
+              { href: "/projects", label: "Projects" },
               { href: "/marketplace", label: "Marketplace" },
               { href: "/features", label: "Features" },
               { href: "/team", label: "Team" },

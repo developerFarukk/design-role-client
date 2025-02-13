@@ -1,7 +1,7 @@
-import Banear from "./components/Home/Banear";
-import FeaturedProject from "./components/Home/FeaturedProject";
-import Projects from "./components/Home/Projects";
-import Skills from "./components/Home/Skills";
+import Banear from "@/components/Home/Banear";
+import FeaturedProject from "@/components/Home/FeaturedProject";
+// import Projects from "@/components/Home/Projects";
+import Skills from "@/components/Home/Skills";
 
 
 export default function Home() {
@@ -22,10 +22,10 @@ export default function Home() {
         <FeaturedProject />
       </div>
 
-      {/* My project */}
+      {/* My project
       <div>
         <Projects />
-      </div>
+      </div> */}
 
     </div>
   );

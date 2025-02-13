@@ -5,7 +5,7 @@ const Projects = () => {
 
     return (
         <div>
-            <div className="text-center text-3xl p-4">
+            <div className="text-center text-3xl p-4 font-bold">
                 <h2>My Project</h2>
             </div>
             <div>
