@@ -1,4 +1,5 @@
 import Banear from "./components/Home/Banear";
+import Skills from "./components/Home/Skills";
 
 
 export default function Home() {
@@ -7,6 +8,11 @@ export default function Home() {
       {/* Banner page */}
       <div className="mt-4">
         <Banear />
+      </div>
+
+      {/* skills section */}
+      <div>
+        <Skills />
       </div>
     </div>
   );
