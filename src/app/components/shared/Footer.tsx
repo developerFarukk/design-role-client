@@ -5,13 +5,6 @@ const Footer = () => {
 
     return (
         <div>
-            {/*
-  Heads up! 👋
-
-  Plugins:
-    - @tailwindcss/forms
-*/}
-
             <footer className="">
                 <div className="mx-auto   pb-2 pt-8">
                     <div className="mx-auto max-w-md">
