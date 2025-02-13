@@ -9,6 +9,23 @@ const Banear = () => {
   const { theme } = useTheme();
   const isDarkMode = theme ? theme === "dark" : false;
 
+  const handleDownload = () => {
+   
+    const fileUrl = "/resume.pdf";
+    const fileName = "resume";
+
+    // একটি লিংক তৈরি করুন
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+
+ 
+    document.body.removeChild(link);
+  };
+
   return (
     <div
       className={`w-full h-auto overflow-hidden transition-all duration-500 ${isDarkMode ? "bg-gray-900 text-white" : "bg-white text-gray-900"
@@ -47,8 +64,8 @@ const Banear = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className={`mt-6 px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow-md ${isDarkMode
-                      ? "bg-blue-500 hover:bg-blue-300 text-gray-900"
-                      : "bg-blue-900 hover:bg-blue-700 text-white"
+                    ? "bg-blue-500 hover:bg-blue-300 text-gray-900"
+                    : "bg-blue-900 hover:bg-blue-700 text-white"
                     }`}
                 >
                   Contact Me
@@ -58,9 +75,10 @@ const Banear = () => {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
+                  onClick={handleDownload}
                   className={`mt-6 px-6 py-3  rounded-full transition-all duration-300 ease-in-out shadow-md ${isDarkMode
-                      ? "bg-blue-500 hover:bg-blue-300 text-gray-900"
-                      : "bg-blue-900 hover:bg-blue-700 text-white"
+                    ? "bg-blue-500 hover:bg-blue-300 text-gray-900"
+                    : "bg-blue-900 hover:bg-blue-700 text-white"
                     }`}
                 >
                   Download Resume
@@ -69,15 +87,15 @@ const Banear = () => {
             </div>
           </div>
           <div className="flex justify-center items-center">
-            
-              <Image
-                className=" rounded-full lg:max-w-[70%] max-w-[60%] mx-auto outline outline-[.7rem] outline-offset-[.1rem] outline-rose-400/30"
-                src={img}
-                alt="Profile Image"
-                width={500}
-                height={500}
-              />
-   
+
+            <Image
+              className=" rounded-full lg:max-w-[70%] max-w-[60%] mx-auto outline outline-[.7rem] outline-offset-[.1rem] outline-rose-400/30"
+              src={img}
+              alt="Profile Image"
+              width={500}
+              height={500}
+            />
+
           </div>
         </div>
       </div>

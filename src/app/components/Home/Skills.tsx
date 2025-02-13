@@ -37,7 +37,7 @@ const Skills = () => {
                             width={100}
                             height={100}
                         />
-                        <p className="cardtxt font-semibold text-gray-200 tracking-wider group-hover:text-gray-700 text-xl p-1 mt-1">
+                        <p className="cardtxt font-semibold  tracking-wider group-hover:text-gray-700 text-xl p-1 mt-1">
                             {skill.title}
                         </p>
                     </div>
