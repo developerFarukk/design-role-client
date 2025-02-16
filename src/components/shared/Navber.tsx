@@ -59,6 +59,7 @@ const Navbar = () => {
               { href: "/projects", label: "Projects" },
               { href: "/blog", label: "Blogs" },
               { href: "/contact", label: "contact" },
+              { href: "/dashboard", label: "Dashboard" },
             ].map(({ href, label }) => (
               <li key={href}>
                 <Link
