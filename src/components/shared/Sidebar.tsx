@@ -10,14 +10,13 @@ import iconss from "@/app/favicon.ico";
 import { CiLogout } from "react-icons/ci";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useTheme } from "next-themes";
-// import { signOut, useSession } from "next-auth/react";
 
 
 
 const Sidebar = () => {
     const pathname = usePathname();
-    // console.log(session);
     const { theme, setTheme } = useTheme();
+
 
 
     return (
