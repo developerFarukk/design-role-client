@@ -111,7 +111,6 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
                 </li>
             }
 
-
           </ul>
         </div>
 
@@ -143,9 +142,6 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
                 Login
               </Link>
           }
-
-
-
 
         </div>
       </div>
