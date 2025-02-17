@@ -19,6 +19,8 @@ type UserProps = {
   }
 }
 
+const isNotNull = <T,>(item: T | null): item is T => item !== null;
+
 const Navbar = ({ session }: { session: UserProps | null }) => {
   // console.log(session);
 
@@ -71,7 +73,7 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
               { href: "/contact", label: "contact" },
               session?.user ? { href: "/dashboard", label: "Dashboard" } : null
             ]
-              .filter(Boolean)
+              .filter(isNotNull)
               .map(({ href, label}) => (
                 <li key={href}>
                   <Link
