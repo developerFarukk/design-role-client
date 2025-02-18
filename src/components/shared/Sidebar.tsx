@@ -54,7 +54,7 @@ const Sidebar = () => {
                         <li key={item.label}>
                             <Link
                                 href={item.href}
-                                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === item.href ? "bg-gray-100 dark:bg-gray-700" : ""
+                                className={`flex items-center p-2  rounded-lg  hover:bg-gray-100 dark:hover:bg-gray-700 group ${pathname === item.href ? "bg-gray-100 dark:bg-gray-700 text-fuchsia-500 font-bold" : "text-white hover:text-blue-400"
                                     }`}
                             >
                                 <svg

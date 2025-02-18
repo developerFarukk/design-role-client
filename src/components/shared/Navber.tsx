@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import { FaSun, FaMoon } from "react-icons/fa";
 import iconss from "../../app/favicon.ico";
 import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 type UserProps = {
   user?: {
@@ -27,6 +28,7 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     setIsClient(true);
@@ -74,11 +76,14 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
               session?.user ? { href: "/dashboard", label: "Dashboard" } : null
             ]
               .filter(isNotNull)
-              .map(({ href, label}) => (
+              .map(({ href, label }) => (
                 <li key={href}>
                   <Link
                     href={href}
-                    className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                    className={`${pathname === href
+                      ? "text-fuchsia-500 font-bold"
+                      : "text-white hover:text-blue-400"
+                      }`}
                   >
                     {label}
                   </Link>
