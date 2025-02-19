@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import Providers from "@/lib/Providers";
+// import Providers from "@/lib/Providers";
 // import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
@@ -27,22 +28,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <Providers>
-      <html suppressHydrationWarning lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+    // <Providers>
+    <html suppressHydrationWarning lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <Providers>
           <ThemeProvider attribute="class" defaultTheme="light">
             <div className="w-[98%] mx-auto p-1">
               <div className="min-h-screen">
-                  {children}
+                {children}
                 <Toaster />
               </div>
               {/* <ToastContainer /> */}
             </div>
           </ThemeProvider>
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+
+      </body>
+    </html>
+
   );
 }

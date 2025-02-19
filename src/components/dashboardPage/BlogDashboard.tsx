@@ -1,15 +1,17 @@
-import { Blog } from "@/types";
+// import { Blog } from "@/types";
 
 
 
-const BlogDashboard = ({ blogs }: { blogs: Blog[] }) => {
+const BlogDashboard = (
+    // { blogs }: { blogs: Blog[] }
+) => {
 
-    console.log(blogs);
+    // console.log(blogs);
     
 
     return (
         <div>
-            <div> The Component is Start BlogDashboard </div>
+            <div> The Component is Start BlogDashboard.... </div>
         </div>
     );
 };

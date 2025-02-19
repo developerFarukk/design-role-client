@@ -25,10 +25,10 @@ const MessagesPage = () => {
                 </h1>
             </header>
 
-            <div className=' p-2 ' style={{ height: "90vh", overflowY: "auto" }}>
+            <div className=' p-2 '>
                 {massage.length > 0 ?
                     (massage.map((massage) => <>
-                        <div className="border-2 border-blue-600 px-5 py-3 rounded-md mb-8" key={massage?.id}>
+                        <div className="border-2 border-blue-600 px-5 py-3 rounded-md mb-8" key={massage.id}>
                             <div className="flow-root rounded-lg border  py-3 shadow-xs p-2">
 
                                 <div className="flex justify-end ">
