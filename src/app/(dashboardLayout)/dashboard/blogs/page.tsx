@@ -1,5 +1,6 @@
 import BlogDashboard from "@/components/dashboardPage/BlogDashboard";
-
+import { authOptions } from "@/utils/authOptions";
+import { getServerSession } from "next-auth";
 
 
 const DashboardBlog = async () => {
@@ -9,6 +10,11 @@ const DashboardBlog = async () => {
             revalidate: 10,
         }
     })
+
+    const session = await getServerSession(authOptions)
+    console.log(session);
+    
+
 
     const blogs = await res.json()
 
@@ -20,5 +26,4 @@ const DashboardBlog = async () => {
         );
     };
 
-export default DashboardBlog
-    ;
+export default DashboardBlog;

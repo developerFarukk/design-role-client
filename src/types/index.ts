@@ -12,3 +12,14 @@ export interface Blog {
     content: string; 
     author: Author;
 }
+
+
+export interface IMessage {
+    id: string
+    name: string;
+    email: string;
+    message: string;
+}
+
+
+export type DraftMessage = Pick<IMessage, "name" | "email" | "message">;
