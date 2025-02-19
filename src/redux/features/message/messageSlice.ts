@@ -32,9 +32,14 @@ const messageSlice = createSlice({
             const messageD = createMessage(action.payload);
             state.messages.push(messageD);
         },
+
+        // Delete Message
+        deleteMessage: (state, action: PayloadAction<string>) => {
+            state.messages = state.messages.filter((message) => message.id !== action.payload);
+        },
     },
 });
 
-export const { sendMessage } = messageSlice.actions;
+export const { sendMessage, deleteMessage } = messageSlice.actions;
 
 export default messageSlice.reducer;

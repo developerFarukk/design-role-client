@@ -16,6 +16,7 @@ const ContactPage = () => {
     })
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        
 
         const toastId = toast.loading('Sending...');
         
@@ -35,6 +36,7 @@ const ContactPage = () => {
             <div>
                 <section className="py-6 ">
                     <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
+
                         <div className="py-6 md:py-0 md:px-6">
                             <h1 className="text-2xl font-bold">Get in touch</h1>
                             <p className="pt-2 pb-4">Fill in the form to start a conversation</p>
@@ -94,12 +96,12 @@ const ContactPage = () => {
                             <label className="block">
                                 <span className="mb-1">Message</span>
                                 <textarea
-                                    {...register("text", { required: "Message is required" })}
+                                    {...register("message", { required: "Message is required" })}
                                     rows={3}
                                     className="block w-full p-2 border-2 border-blue-200 rounded-md focus:ring focus:ring-opacity-75 "
                                 />
                                 <div className="flex justify-end mt-1">
-                                    <label className={errors.text ? "text-red-700 text-sm" : "hidden"}>{errors.text?.message}</label>
+                                    <label className={errors.message ? "text-red-700 text-sm" : "hidden"}>{errors.message?.message}</label>
                                 </div>
                             </label>
 
