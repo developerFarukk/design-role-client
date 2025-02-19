@@ -33,11 +33,34 @@ const blogManagementApi = baseApi.injectEndpoints({
             },
         }),
 
+        // Delete Blog
+        deleteBlog: builder.mutation({
+            query: ({ id }) => ({
+                url: `/blogs/${id}`,
+                // url: `http://localhost:5001/api/blogs/${id}`,
+                method: 'DELETE',
+                // body,
+            }),
+            invalidatesTags: ['Blogs']
+        }),
+
+        // create Product API
+        createBlog: builder.mutation({
+            query: (data) => ({
+                url: '/blogs/create-blog',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Blogs']
+        }),
+
     }),
 });
 
 export const {
-    useGetAllBlogsQuery
+    useGetAllBlogsQuery,
+    useDeleteBlogMutation,
+    useCreateBlogMutation
 
 } = blogManagementApi;
 

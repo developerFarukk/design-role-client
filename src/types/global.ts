@@ -34,8 +34,8 @@ export type TQueryParam = {
 };
 
 
-// export interface TExtraError {
-//     data?: {
-//         message?: string;
-//     };
-// }
+export interface TExtraError {
+    data?: {
+        message?: string;
+    };
+}
