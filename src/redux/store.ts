@@ -8,26 +8,26 @@ import storage from 'redux-persist/lib/storage';
 
 
 const messagePersistConfig = {
-    key: 'message', 
+    key: 'message',
     storage: storage, 
-    whitelist: ['name', 'email', 'message'],
+    whitelist: ['messages'], 
 };
 
 
-const persistedCardReducer = persistReducer(messagePersistConfig, messageReducer);
+const persistedMessageReducer = persistReducer(messagePersistConfig, messageReducer);
 
 
 export const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
-        messages: persistedCardReducer, 
+        messages: persistedMessageReducer,
     },
     middleware: (getDefaultMiddlewares) =>
         getDefaultMiddlewares({
             serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER], 
             },
-        }).concat(baseApi.middleware),
+        }).concat(baseApi.middleware), 
 });
 
 

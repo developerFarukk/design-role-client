@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-// import { Toaster } from "sonner";
+import { Toaster } from "sonner";
 import Providers from "@/lib/Providers";
 // import { ToastContainer } from "react-toastify";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
             <div className="w-[98%] mx-auto p-1">
               <div className="min-h-screen">
                   {children}
-                {/* <Toaster /> */}
+                <Toaster />
               </div>
               {/* <ToastContainer /> */}
             </div>

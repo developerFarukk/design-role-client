@@ -5,19 +5,25 @@ import { sendMessage } from "@/redux/features/message/messageSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { DraftMessage, IMessage } from "@/types";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const ContactPage = () => {
 
     const dispatch = useAppDispatch();
 
-    const { register, handleSubmit,  formState: { errors }, } = useForm<DraftMessage>({
+    const { register, handleSubmit, reset,  formState: { errors }, } = useForm<DraftMessage>({
         mode: "onBlur",
     })
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        // console.log(data);
+
+        const toastId = toast.loading('Sending...');
         
         dispatch(sendMessage(data as IMessage))
+
+        toast.success('Send Message Successfully', { id: toastId });
+
+        reset()
     };
 
     return (
