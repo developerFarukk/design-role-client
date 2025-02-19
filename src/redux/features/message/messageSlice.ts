@@ -10,12 +10,12 @@ interface TMessageState {
 
 const initialState: TMessageState = {
     messages: [
-        {
-            id: "234534534",
-            name: "omar faruk",
-            email: "ff@gmail.com",
-            message: "amar suner bangla"
-        }
+        // {
+        //     id: "234534534",
+        //     name: "omar faruk",
+        //     email: "ff@gmail.com",
+        //     message: "amar suner bangla"
+        // }
     ],
 };
 

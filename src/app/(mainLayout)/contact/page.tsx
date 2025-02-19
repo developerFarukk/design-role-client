@@ -1,7 +1,24 @@
 
 "use client"
 
+import { sendMessage } from "@/redux/features/message/messageSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { DraftMessage, IMessage } from "@/types";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
 const ContactPage = () => {
+
+    const dispatch = useAppDispatch();
+
+    const { register, handleSubmit,  formState: { errors }, } = useForm<DraftMessage>({
+        mode: "onBlur",
+    })
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        // console.log(data);
+        
+        dispatch(sendMessage(data as IMessage))
+    };
 
     return (
         <div className="lg:mt-16">
@@ -37,35 +54,54 @@ const ContactPage = () => {
                                 </p>
                             </div>
                         </div>
-                        <form noValidate className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
+                        <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
+
+                            {/* Name */}
                             <label className="block">
                                 <span className="mb-1">Full name</span>
                                 <input
-                                    type="text"
-                                    placeholder="Leroy Jenkins"
+                                    type="name"
+                                    placeholder="Inpute your name"
                                     className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
+                                    {...register("name", { required: "Name is required" })}
                                 />
+                                <div className="flex justify-end mt-1">
+                                    <label className={errors.name ? "text-red-700 text-sm" : "hidden"}>{errors.name?.message}</label>
+                                </div>
                             </label>
+
+                            {/* Email */}
                             <label className="block">
                                 <span className="mb-1">Email address</span>
                                 <input
                                     type="email"
-                                    placeholder="leroy@jenkins.com"
+                                    placeholder="Inpute your email"
                                     className="block p-2 w-full border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75 "
+                                    {...register("email", { required: "email is required" })}
                                 />
+                                <div className="flex justify-end mt-1">
+                                    <label className={errors.email ? "text-red-700 text-sm" : "hidden"}>{errors.email?.message}</label>
+                                </div>
                             </label>
+
+                            {/* message */}
                             <label className="block">
                                 <span className="mb-1">Message</span>
                                 <textarea
+                                    {...register("text", { required: "Message is required" })}
                                     rows={3}
                                     className="block w-full p-2 border-2 border-blue-200 rounded-md focus:ring focus:ring-opacity-75 "
-                                ></textarea>
+                                />
+                                <div className="flex justify-end mt-1">
+                                    <label className={errors.text ? "text-red-700 text-sm" : "hidden"}>{errors.text?.message}</label>
+                                </div>
                             </label>
+
                             <button
-                                type="button"
+                                type="submit"
                                 className="self-center px-8 py-3 text-lg rounded focus:ring hover:ring focus:ring-opacity-75 dark:bg-violet-600 dark:text-gray-50 focus:dark:ring-violet-600 hover:dark:ring-violet-600"
                             >
-                                Submit
+                                Send Message
                             </button>
                         </form>
                     </div>
