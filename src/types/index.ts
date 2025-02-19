@@ -11,6 +11,10 @@ export interface Blog {
     title: string; 
     content: string; 
     author: Author;
+    image: string
+    category: string;
+    createdAt: string;
+    updatedAt: string
 }
 
 

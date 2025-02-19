@@ -4,8 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 import Providers from "@/lib/Providers";
-// import Providers from "@/lib/Providers";
-// import { ToastContainer } from "react-toastify";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +39,6 @@ export default function RootLayout({
                 {children}
                 <Toaster />
               </div>
-              {/* <ToastContainer /> */}
             </div>
           </ThemeProvider>
         </Providers>

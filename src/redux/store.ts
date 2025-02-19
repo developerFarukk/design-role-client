@@ -4,9 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import messageReducer from "./features/message/messageSlice";
 import { baseApi } from './api/baseApi';
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, persistReducer } from 'redux-persist';
-// import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-// import { blogApi } from './features/blogManagmentApi/blogManagmentApi';
 
 
 const messagePersistConfig = {
@@ -22,11 +20,8 @@ const persistedMessageReducer = persistReducer(messagePersistConfig, messageRedu
 export const store = configureStore({
     reducer: {
         [baseApi.reducerPath]: baseApi.reducer,
-        // [blogApi.reducerPath]: blogApi.reducer,
         messages: persistedMessageReducer,
     },
-    // middleware: (getDefaultMiddleware) =>
-    //     getDefaultMiddleware().concat(blogApi.middleware),
     middleware: (getDefaultMiddlewares) =>
         getDefaultMiddlewares({
             serializableCheck: {
