@@ -53,14 +53,14 @@ const projectManagementApi = baseApi.injectEndpoints({
         }),
 
         // Update Blog
-        // updateBlog: builder.mutation({
-        //     query: ({ id, body }) => ({
-        //         url: `/blogs/${id}`,
-        //         method: 'PATCH',
-        //         body,
-        //     }),
-        //     invalidatesTags: ['Blogs']
-        // }),
+        updateProject: builder.mutation({
+            query: ({ id, body }) => ({
+                url: `/projects/${id}`,
+                method: 'PATCH',
+                body,
+            }),
+            invalidatesTags: ['Projects']
+        }),
 
     }),
 });
@@ -70,7 +70,8 @@ const projectManagementApi = baseApi.injectEndpoints({
 export const {
     useGetAllProjectsQuery,
     useDeletePeojectMutation,
-    useCreateProjectMutation
+    useCreateProjectMutation,
+    useUpdateProjectMutation
     
 
 } = projectManagementApi;

@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import { TExtraError } from "@/types/global";
 import CreateProject from "./CreateProject";
 import Link from "next/link";
+import UpdateProject from "./UpdateProject";
 
 
 
@@ -176,14 +177,14 @@ const ProjectHome = () => {
                                     </div>
 
 
-                                    <div className="flex justify-end gap-2 p-4">
+                                    <div className="flex justify-end gap-2 p-6">
                                         <button
                                             onClick={() => handleDeleteProject(project)}
                                             className="p-2 border-2 rounded-full"
                                         >
                                             <Trash2 />
                                         </button>
-                                        {/* <Updateproject project={project} /> */}
+                                        <UpdateProject project={project} />
                                     </div>
                                 </div>
                             </article>

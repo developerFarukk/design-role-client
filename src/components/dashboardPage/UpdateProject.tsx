@@ -1,28 +1,33 @@
-
-
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 "use client";
 
-import { useCreateProjectMutation } from '@/redux/features/projectsManagment/projectManagmentApi';
+
+import { useUpdateProjectMutation } from '@/redux/features/projectsManagment/projectManagmentApi';
 import { TProject } from '@/types';
-import { TResponse } from '@/types/global';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-const CreateProject = () => {
-    const [createProject] = useCreateProjectMutation();
+interface TProjects {
+    project: TProject;
+}
+
+const UpdateProject = (project: TProjects) => {
+
+
+    const [updateProject] = useUpdateProjectMutation();
+
     const [isOpen, setIsOpen] = useState(false);
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<TProject>({
+    const { register, handleSubmit, reset } = useForm<TProject>({
         mode: "onBlur",
     });
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
         const projectData = {
             project: {
                 title: data.title,
@@ -33,30 +38,24 @@ const CreateProject = () => {
             }
         };
 
-        // console.log(projectData);
-
-
         const formData = new FormData();
         formData.append('data', JSON.stringify(projectData));
         formData.append('file', data.image[0]);
 
-        // console.log("Form Data:", Object.fromEntries(formData));
-
-        const toastId = toast.loading('Creating...');
+        const toastId = toast.loading("Updating...");
 
         try {
-            const res = (await createProject(formData)) as TResponse<any>;
-            // console.log(res);
+            const res = await updateProject({ id: project?.project?._id, body: formData }).unwrap();
 
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
             } else {
-                toast.success('Project created Successfully', { id: toastId });
+                toast.success("Project updated successfully", { id: toastId });
                 reset();
                 close();
             }
         } catch (err) {
-            toast.error('Something went wrong', { id: toastId });
+            toast.error("Something went wrong", { id: toastId });
         }
     };
 
@@ -65,19 +64,19 @@ const CreateProject = () => {
 
     return (
         <>
-            {/* Create Project Button */}
+            {/* Uodate Blog Button */}
             <button
                 onClick={open}
-                className="block rounded-md bg-blue-500 px-5 py-3 text-center text-xs font-bold hover:text-gray-900 uppercase transition hover:bg-blue-200 text-white"
+                className="block rounded-md bg-yellow-300 px-5 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-yellow-400"
             >
-                Create Project
+                Update Priject
             </button>
 
             <Dialog open={isOpen} onClose={close} as="div" className="relative z-10">
                 <div className="fixed inset-0  backdrop-blur-lg" aria-hidden="true" />
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-center justify-center p-4">
-                        <DialogPanel className="w-full max-w-md rounded-xl border-2 p-6">
+                        <DialogPanel className="w-full border-2  max-w-md rounded-xl p-6">
                             <DialogTitle as="h3" className="font-medium flex justify-center text-2xl">
                                 Create Project
                             </DialogTitle>
@@ -88,15 +87,10 @@ const CreateProject = () => {
                                     <span className="mb-1">Project Title</span>
                                     <input
                                         type="text"
-                                        placeholder="Input project title"
+                                        defaultValue={project?.project?.title}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("title", { required: "Title is required" })}
+                                        {...register("title")}
                                     />
-                                    <div className="flex justify-end mt-1">
-                                        <label className={errors.title ? "text-red-700 text-sm" : "hidden"}>
-                                            {errors.title?.message}
-                                        </label>
-                                    </div>
                                 </label>
 
                                 {/* Project Image */}
@@ -104,29 +98,20 @@ const CreateProject = () => {
                                     <span className="mb-1">Upload Project Image</span>
                                     <input
                                         type="file"
+                                        // defaultValue={project?.project?.image}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("image", { required: "Image is required" })}
+                                        {...register("image")}
                                     />
-                                    <div className="flex justify-end mt-1">
-                                        <label className={errors.image ? "text-red-700 text-sm" : "hidden"}>
-                                            {errors.image?.message}
-                                        </label>
-                                    </div>
                                 </label>
 
                                 {/* Project Descriptions */}
                                 <label className="block mt-2 text-sm/6">
                                     <span className="mb-1">Project Descriptions</span>
                                     <textarea
-                                        placeholder="Input project descriptions"
+                                        defaultValue={project?.project?.descriptions}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("descriptions", { required: "Descriptions is required" })}
+                                        {...register("descriptions")}
                                     />
-                                    <div className="flex justify-end mt-1">
-                                        <label className={errors.descriptions ? "text-red-700 text-sm" : "hidden"}>
-                                            {errors.descriptions?.message}
-                                        </label>
-                                    </div>
                                 </label>
 
                                 {/* Project Live Link */}
@@ -134,15 +119,10 @@ const CreateProject = () => {
                                     <span className="mb-1">Project Live Link</span>
                                     <input
                                         type="url"
-                                        placeholder="Input project liveLink"
+                                        defaultValue={project?.project?.liveLink}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("liveLink", { required: "Live Link is required" })}
+                                        {...register("liveLink")}
                                     />
-                                    <div className="flex justify-end mt-1">
-                                        <label className={errors.liveLink ? "text-red-700 text-sm" : "hidden"}>
-                                            {errors.liveLink?.message}
-                                        </label>
-                                    </div>
                                 </label>
 
                                 {/* Project GitHub Server Link */}
@@ -150,7 +130,7 @@ const CreateProject = () => {
                                     <span className="mb-1">Project GitHub Server Link</span>
                                     <input
                                         type="url"
-                                        placeholder="Input project githubServer"
+                                        defaultValue={project?.project?.githubServer}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
                                         {...register("githubServer")}
                                     />
@@ -161,7 +141,7 @@ const CreateProject = () => {
                                     <span className="mb-1">Project GitHub Client Link</span>
                                     <input
                                         type="url"
-                                        placeholder="Input project githubClient"
+                                        defaultValue={project?.project?.githubClient}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
                                         {...register("githubClient")}
                                     />
@@ -185,4 +165,4 @@ const CreateProject = () => {
     );
 };
 
-export default CreateProject;
+export default UpdateProject;
