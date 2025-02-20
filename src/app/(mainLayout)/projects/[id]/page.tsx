@@ -1,6 +1,5 @@
 
 
-
 const ProjectDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
     const { id } = await params;
@@ -8,9 +7,7 @@ const ProjectDetailPage = async ({ params }: { params: Promise<{ id: string }> }
     console.log(id);
     
 
-    // const res = await fetch(`http://localhost:5001/api/project/${id}`);
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL_SERVER}/api/projects/${id}`);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL_SERVER}/api/projects`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL_SERVER}/api/projects/${id}`);
     const project = await res.json();
 
     console.log(project);
