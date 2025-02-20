@@ -1,10 +1,28 @@
-// import Image from "next/image";
+"use client"
+
+import { useGetAllProjectsQuery } from "@/redux/features/projectsManagment/projectManagmentApi";
+import LoadingProgress from "../shared/LoadingProgress";
 
 
 
 const ProjectHome = () => {
 
+    const { data, error, isLoading } = useGetAllProjectsQuery(undefined);
+
+    // const [deleteblog] = useDeleteBlogMutation();
+
+
+    const projects = data?.data
+    console.log(projects);
     
+
+    if (isLoading) {
+        return <LoadingProgress />;
+    }
+
+    if (error) {
+        return <div>Data no fetch</div>;
+    }
 
     return (
         <div>
@@ -17,7 +35,7 @@ const ProjectHome = () => {
                 </h1>
             </header>
             <div>
-                
+
             </div>
         </div>
     );

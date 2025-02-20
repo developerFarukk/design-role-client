@@ -8,7 +8,7 @@ const projectManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
 
         // Get All Blog
-        getAllBlogs: builder.query({
+        getAllProjects: builder.query({
             query: (args) => {
                 // console.log(args);
                 const params = new URLSearchParams();
@@ -68,7 +68,7 @@ const projectManagementApi = baseApi.injectEndpoints({
 
 
 export const {
-    useGetAllBlogsQuery,
+    useGetAllProjectsQuery
     
 
 } = projectManagementApi;
