@@ -1,21 +1,20 @@
 "use client"
 
-import LoadingProgress from "@/components/shared/LoadingProgress";
+
 import { useGetAllBlogsQuery } from "@/redux/features/blogManagmentApi/blogManagmentApi";
-// import { authOptions } from "@/utils/authOptions";
-// import { getServerSession } from "next-auth";
+
 
 import { useGetAllProjectsQuery } from "@/redux/features/projectsManagment/projectManagmentApi";
 
 
 
+
 const Dashboard = () => {
 
-    // const session = await getServerSession(authOptions);
 
-    const { data: projects, error, isLoading } = useGetAllProjectsQuery(undefined);
+    const { data: projects, error: er, isLoading } = useGetAllProjectsQuery(undefined);
 
-    const { data: blogs } = useGetAllBlogsQuery(undefined);
+    const { data: blogs, isLoading: lod, error } = useGetAllBlogsQuery(undefined);
 
     const project = projects?.data.length
 
@@ -23,10 +22,18 @@ const Dashboard = () => {
 
 
     if (isLoading) {
-        return <LoadingProgress />;
+        return <div>Loading...</div>;
+    }
+
+    if (lod) {
+        return <div>Loading...</div>;
     }
 
     if (error) {
+        return <div>Data no fetch</div>;
+    }
+
+    if (er) {
         return <div>Data no fetch</div>;
     }
 
@@ -38,7 +45,7 @@ const Dashboard = () => {
                         Dashboard
                     </h1>
                 </header>
-                <div className="lg:flex justify-center  items-center gap-6  mt-12">
+                <div className="lg:flex justify-center  items-center gap-12  mt-12">
 
                     <div
                         className="hover:-translate-y-2 group border-2 bg-neutral-50 duration-500 w-44 h-44 flex text-neutral-600 flex-col justify-center items-center relative rounded-xl overflow-hidden shadow-md lg:mb-0 mb-12"
