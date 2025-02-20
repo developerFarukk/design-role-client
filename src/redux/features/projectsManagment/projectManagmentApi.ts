@@ -42,15 +42,15 @@ const projectManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['Projects']
         }),
 
-        // create Blog
-        // createBlog: builder.mutation({
-        //     query: (data) => ({
-        //         url: '/blogs/create-blog',
-        //         method: 'POST',
-        //         body: data,
-        //     }),
-        //     invalidatesTags: ['Blogs']
-        // }),
+        // create Project
+        createProject: builder.mutation({
+            query: (data) => ({
+                url: '/projects/create-project',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['Blogs']
+        }),
 
         // Update Blog
         // updateBlog: builder.mutation({
@@ -69,7 +69,8 @@ const projectManagementApi = baseApi.injectEndpoints({
 
 export const {
     useGetAllProjectsQuery,
-    useDeletePeojectMutation
+    useDeletePeojectMutation,
+    useCreateProjectMutation
     
 
 } = projectManagementApi;

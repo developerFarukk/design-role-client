@@ -9,6 +9,7 @@ import { Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import { toast } from "sonner";
 import { TExtraError } from "@/types/global";
+import CreateProject from "./CreateProject";
 
 
 
@@ -86,6 +87,13 @@ const ProjectHome = () => {
                     </span>
                 </h1>
             </header>
+
+            <div className="flex justify-end">
+                <div>
+                    <CreateProject />
+                </div>
+            </div>
+
             <div>
                 <div className="p-2 mt-4">
                     {projects.length > 0 ? (
@@ -97,8 +105,8 @@ const ProjectHome = () => {
                                         dateTime="2022-10-10"
                                         className="flex items-center justify-between gap-4 text-xs font-bold text-gray-900 uppercase"
                                     >
-                                        <span>Create</span>
-                                        <span>{formatDate(project?.updatedAt)}</span>
+                                        <span>Create : {formatDate(project?.createdAt)}</span>
+                                        <span>Updated : {formatDate(project?.updatedAt)}</span>
                                     </time>
                                 </div>
 
@@ -107,9 +115,9 @@ const ProjectHome = () => {
                                     <Image
                                         alt="project..."
                                         src={project?.image}
-                                        className="aspect-square h-36 w-36 object-cover flex justify-center items-center"
-                                        height={500}
-                                        width={500}
+                                        className="aspect-square h-auto w-60 object-cover flex justify-center items-center"
+                                        height={1000}
+                                        width={1000}
                                     />
                                 </div>
 

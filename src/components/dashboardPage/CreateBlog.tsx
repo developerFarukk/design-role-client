@@ -52,7 +52,7 @@ const CreateBlog = () => {
                 Create Blog
             </button>
 
-            {/* মডেল */}
+           
             <Dialog open={isOpen} onClose={close} as="div" className="relative z-10">
 
                 <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
