@@ -6,7 +6,7 @@ const FeaturedProject = () => {
 
     return (
         <div>
-            <div className="text-center text-3xl font-bold mt-4 p-4">
+            <div className="text-center text-3xl font-bold mt-4 p-4 mb-6">
                 <h2>My Project Featured</h2>
             </div>
             <FeaturProjectSlider />
