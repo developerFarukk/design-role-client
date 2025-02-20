@@ -2,6 +2,7 @@
 "use client"
 
 import CreateBlog from "@/components/dashboardPage/CreateBlog";
+import UpdateBlog from "@/components/dashboardPage/UpdateBlog";
 import LoadingProgress from "@/components/shared/LoadingProgress";
 import { useDeleteBlogMutation, useGetAllBlogsQuery } from "@/redux/features/blogManagmentApi/blogManagmentApi";
 import { Blog } from "@/types";
@@ -84,76 +85,88 @@ const DashboardBlog = () => {
             </header>
 
             <div className="flex justify-end">
-                <button
-                // className="block rounded-md bg-blue-500 px-5 py-3 text-center text-xs font-bold hover:text-gray-900 uppercase transition hover:bg-blue-200 text-white"
-                >
+                <div>
                     {/* Create Blog */}
                     <CreateBlog />
-                </button>
+                </div>
             </div>
 
-            <div className="p-2 mt-4  ">
-                {
-                    blogs.length > 0 ? (
-                        blogs.map((blog: Blog) =>
-                            <article key={blog._id} className="flex  transition hover:shadow-xl p-2 border-2 rounded-md mb-6">
-                                <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
-                                    <time
-                                        dateTime="2022-10-10"
-                                        className="flex items-center justify-between gap-4 text-xs font-bold text-gray-900 uppercase"
-                                    >
-                                        <span>Create</span>
-                                        {/* <span className="w-px flex bg-gray-900/10"></span> */}
-                                        <span> {formatDate(blog?.updatedAt)}</span>
-                                    </time>
-                                </div>
-
-                                <div className="hidden sm:block sm:basis-56">
-                                    <Image
-                                        alt="blog..."
-                                        src={blog.image}
-                                        className="aspect-square h-36 w-36 object-cover flex justify-center items-center"
-                                        height={500}
-                                        width={500}
-                                    />
-                                </div>
-
-                                <div className="flex flex-1 flex-col justify-between">
-                                    <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
-
-                                        <h3 className="font-bold  uppercase">
-                                            {blog.title}
-                                        </h3>
-
-                                        <p className="mt-2 line-clamp-3 text-sm/relaxed ">
-                                            {blog.content}
-                                        </p>
-                                    </div>
-
-                                    <div className="flex justify-end gap-2">
-                                        <button
-                                            onClick={() => handleDeleteProduct(blog)}
-                                            className="p-2  border-2 rounded-full">
-                                            <Trash2 />
-                                        </button>
-                                        <button
-                                            className="block rounded-md bg-yellow-300 px-5 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-yellow-400"
-                                        >
-                                            Update Blog
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-                        )
-
-                    ) :
-                        (
-                            <div className="text-center ">
-                                <p> No Blogs </p>
+            <div className="p-2 mt-4">
+                {blogs.length > 0 ? (
+                    blogs?.map((blog: Blog) => (
+                        <article key={blog._id} className="flex transition hover:shadow-xl p-2 border-2 rounded-md mb-6">
+                            {/* তারিখ সেকশন */}
+                            <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
+                                <time
+                                    dateTime="2022-10-10"
+                                    className="flex items-center justify-between gap-4 text-xs font-bold text-gray-900 uppercase"
+                                >
+                                    <span>Create</span>
+                                    <span>{formatDate(blog?.updatedAt)}</span>
+                                </time>
                             </div>
-                        )
-                }
 
+                            {/* ইমেজ সেকশন */}
+                            <div className="hidden sm:block sm:basis-56">
+                                <Image
+                                    alt="blog..."
+                                    src={blog?.image}
+                                    className="aspect-square h-36 w-36 object-cover flex justify-center items-center"
+                                    height={500}
+                                    width={500}
+                                />
+                            </div>
+
+                            {/* কন্টেন্ট সেকশন */}
+                            <div className="flex flex-1 flex-col justify-between">
+                                <div className="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                                    <dl className="-my-3 divide-y text-sm">
+
+                                        {/* টাইটেল */}
+                                        <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                            <dt className="font-medium uppercase">Title</dt>
+                                            <dd className="sm:col-span-2 font-semibold text-blue-600 break-words overflow-hidden">
+                                                {blog?.title}
+                                            </dd>
+                                        </div>
+
+                                        {/* কন্টেন্ট */}
+                                        <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                            <dt className="font-medium uppercase">Content</dt>
+                                            <dd className="sm:col-span-2 break-words overflow-y-auto max-h-32">
+                                                {blog?.content}
+                                            </dd>
+                                        </div>
+
+                                        {/* ক্যাটাগরি */}
+                                        <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                                            <dt className="font-medium uppercase">Category</dt>
+                                            <dd className="sm:col-span-2 break-words overflow-hidden">
+                                                {blog?.category}
+                                            </dd>
+                                        </div>
+
+                                    </dl>
+                                </div>
+
+                                {/* বাটন গ্রুপ */}
+                                <div className="flex justify-end gap-2 p-4">
+                                    <button
+                                        onClick={() => handleDeleteProduct(blog)}
+                                        className="p-2 border-2 rounded-full"
+                                    >
+                                        <Trash2 />
+                                    </button>
+                                    <UpdateBlog blog={blog} />
+                                </div>
+                            </div>
+                        </article>
+                    ))
+                ) : (
+                    <div className="text-center">
+                        <p>No Blogs</p>
+                    </div>
+                )}
             </div>
         </div>
     );

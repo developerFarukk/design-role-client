@@ -1,19 +1,24 @@
-
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 "use client";
 
-import { useCreateBlogMutation } from '@/redux/features/blogManagmentApi/blogManagmentApi';
+import { useUpdateBlogMutation } from '@/redux/features/blogManagmentApi/blogManagmentApi';
 import { Blog } from '@/types';
-import { TResponse } from '@/types/global';
 import { Button, Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-const CreateBlog = () => {
-    const [createBlog] = useCreateBlogMutation();
+interface TBlogs {
+    blog: Blog;
+}
+
+const UpdateBlog = (blog: TBlogs) => {
+
+
+    const [updateBlog] = useUpdateBlogMutation();
+
     const [isOpen, setIsOpen] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<Blog>({
@@ -21,21 +26,21 @@ const CreateBlog = () => {
     });
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        console.log(data);
 
-        const toastId = toast.loading('Creating...');
+        const toastId = toast.loading("Updating...");
 
         try {
-            const res = (await createBlog(data)) as TResponse<any>;
+            const res = await updateBlog({ id: blog?.blog?._id, body: data }).unwrap();
+
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
             } else {
-                toast.success('Blog created Successfully', { id: toastId });
+                toast.success("Blog updated successfully", { id: toastId });
+                reset();
+                close();
             }
-            reset();
-            close();
         } catch (err) {
-            toast.error('Something went wrong', { id: toastId });
+            toast.error("Something went wrong", { id: toastId });
         }
     };
 
@@ -44,15 +49,14 @@ const CreateBlog = () => {
 
     return (
         <>
-            {/* Create Blog Button */}
+            {/* Uodate Blog Button */}
             <button
                 onClick={open}
-                className="block rounded-md bg-blue-500 px-5 py-3 text-center text-xs font-bold hover:text-gray-900 uppercase transition hover:bg-blue-200 text-white"
+                className="block rounded-md bg-yellow-300 px-5 py-3 text-center text-xs font-bold text-gray-900 uppercase transition hover:bg-yellow-400"
             >
-                Create Blog
+                Update Blog
             </button>
 
-            {/* মডেল */}
             <Dialog open={isOpen} onClose={close} as="div" className="relative z-10">
 
                 <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" aria-hidden="true" />
@@ -62,19 +66,20 @@ const CreateBlog = () => {
                     <div className="flex min-h-full items-center justify-center p-4">
                         <DialogPanel className="w-full max-w-md rounded-xl bg-white p-6">
                             <DialogTitle as="h3" className="font-medium flex justify-center text-2xl">
-                                Create Blog
+                                Update Blog
                             </DialogTitle>
 
 
                             <form onSubmit={handleSubmit(onSubmit)}>
+
                                 {/* Blog Title */}
                                 <label className="block mt-2 text-sm/6">
                                     <span className="mb-1">Blog Title</span>
                                     <input
                                         type="text"
-                                        placeholder="Input blog title"
+                                        defaultValue={blog?.blog?.title}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("title", { required: "Title is required" })}
+                                        {...register("title")}
                                     />
                                     <div className="flex justify-end mt-1">
                                         <label className={errors.title ? "text-red-700 text-sm" : "hidden"}>
@@ -88,9 +93,9 @@ const CreateBlog = () => {
                                     <span className="mb-1">Blog Image Link</span>
                                     <input
                                         type="url"
-                                        placeholder="Input valid image url"
+                                        defaultValue={blog?.blog?.image}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("image", { required: "Image link is required" })}
+                                        {...register("image")}
                                     />
                                     <div className="flex justify-end mt-1">
                                         <label className={errors.image ? "text-red-700 text-sm" : "hidden"}>
@@ -104,9 +109,9 @@ const CreateBlog = () => {
                                     <span className="mb-1">Blog Category</span>
                                     <input
                                         type="text"
-                                        placeholder="Input blog category"
+                                        defaultValue={blog?.blog?.category}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("category", { required: "Category is required" })}
+                                        {...register("category")}
                                     />
                                     <div className="flex justify-end mt-1">
                                         <label className={errors.category ? "text-red-700 text-sm" : "hidden"}>
@@ -119,9 +124,9 @@ const CreateBlog = () => {
                                 <label className="block mt-2 text-sm/6">
                                     <span className="mb-1">Blog Content</span>
                                     <textarea
-                                        {...register("content", { required: "Content is required" })}
+                                        {...register("content")}
                                         rows={3}
-                                        placeholder="Input blog content"
+                                        defaultValue={blog?.blog?.content}
                                         className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
                                     />
                                     <div className="flex justify-end mt-1">
@@ -149,4 +154,4 @@ const CreateBlog = () => {
     );
 };
 
-export default CreateBlog;
+export default UpdateBlog;
