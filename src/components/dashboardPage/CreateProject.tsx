@@ -33,20 +33,20 @@ const CreateProject = () => {
             }
         };
 
-        console.log(projectData);
+        // console.log(projectData);
 
 
         const formData = new FormData();
         formData.append('data', JSON.stringify(projectData));
         formData.append('file', data.image[0]);
 
-        console.log("Form Data:", Object.fromEntries(formData));
+        // console.log("Form Data:", Object.fromEntries(formData));
 
         const toastId = toast.loading('Creating...');
 
         try {
             const res = (await createProject(formData)) as TResponse<any>;
-            console.log(res);
+            // console.log(res);
 
             if (res.error) {
                 toast.error(res.error.data.message, { id: toastId });
