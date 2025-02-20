@@ -49,7 +49,7 @@ const projectManagementApi = baseApi.injectEndpoints({
                 method: 'POST',
                 body: data,
             }),
-            invalidatesTags: ['Blogs']
+            invalidatesTags: ['Projects']
         }),
 
         // Update Blog

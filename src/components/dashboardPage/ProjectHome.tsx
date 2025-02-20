@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 import { toast } from "sonner";
 import { TExtraError } from "@/types/global";
 import CreateProject from "./CreateProject";
+import Link from "next/link";
 
 
 
@@ -116,8 +117,8 @@ const ProjectHome = () => {
                                         alt="project..."
                                         src={project?.image}
                                         className="aspect-square h-auto w-60 object-cover flex justify-center items-center"
-                                        height={1000}
-                                        width={1000}
+                                        height={5000}
+                                        width={5000}
                                     />
                                 </div>
 
@@ -129,7 +130,7 @@ const ProjectHome = () => {
 
                                             <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                                                 <dt className="font-medium uppercase">Title</dt>
-                                                <dd className="sm:col-span-2 font-semibold text-blue-600 break-words overflow-hidden">
+                                                <dd className="sm:col-span-2 font-bold text-blue-600 break-words overflow-hidden">
                                                     {project?.title}
                                                 </dd>
                                             </div>
@@ -146,21 +147,28 @@ const ProjectHome = () => {
                                             <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                                                 <dt className="font-medium uppercase">Live Link</dt>
                                                 <dd className="sm:col-span-2 break-words overflow-hidden">
-                                                    {project?.liveLink}
+                                                    <Link href={project?.liveLink} target="_blank" className="text-blue-300 hover:text-blue-700 font-medium">
+                                                        {project?.liveLink}
+                                                    </Link>
+
                                                 </dd>
                                             </div>
 
                                             <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                                                 <dt className="font-medium uppercase">GitHub Client</dt>
                                                 <dd className="sm:col-span-2 break-words overflow-hidden">
-                                                    {project?.githubClient}
+                                                    <Link href={project?.githubClient} target="_blank" className="text-blue-300 hover:text-blue-700 font-medium">
+                                                        {project?.githubClient}
+                                                    </Link>
                                                 </dd>
                                             </div>
 
                                             <div className="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                                                 <dt className="font-medium uppercase">GitHub Server</dt>
                                                 <dd className="sm:col-span-2 break-words overflow-hidden">
-                                                    {project?.githubServer}
+                                                    <Link href={project?.githubServer} target="_blank" className="text-blue-300 hover:text-blue-700 font-medium">
+                                                        {project?.githubServer}
+                                                    </Link>
                                                 </dd>
                                             </div>
 
