@@ -7,7 +7,7 @@ import { TQueryParam, TResponseRedux } from "@/types/global";
 const projectManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
 
-        // Get All Blog
+        // Get All Preject
         getAllProjects: builder.query({
             query: (args) => {
                 // console.log(args);
@@ -33,14 +33,14 @@ const projectManagementApi = baseApi.injectEndpoints({
             },
         }),
 
-        // Delete Blog
-        // deleteBlog: builder.mutation({
-        //     query: ({ id }) => ({
-        //         url: `/blogs/${id}`,
-        //         method: 'DELETE',
-        //     }),
-        //     invalidatesTags: ['Blogs']
-        // }),
+        // Delete Project
+        deletePeoject: builder.mutation({
+            query: ({ id }) => ({
+                url: `/projects/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Projects']
+        }),
 
         // create Blog
         // createBlog: builder.mutation({
@@ -68,7 +68,8 @@ const projectManagementApi = baseApi.injectEndpoints({
 
 
 export const {
-    useGetAllProjectsQuery
+    useGetAllProjectsQuery,
+    useDeletePeojectMutation
     
 
 } = projectManagementApi;

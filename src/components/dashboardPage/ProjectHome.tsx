@@ -1,10 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import { useGetAllProjectsQuery } from "@/redux/features/projectsManagment/projectManagmentApi";
+import { useDeletePeojectMutation, useGetAllProjectsQuery } from "@/redux/features/projectsManagment/projectManagmentApi";
 import LoadingProgress from "../shared/LoadingProgress";
 import { TProject } from "@/types";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
+import Swal from "sweetalert2";
+import { toast } from "sonner";
+import { TExtraError } from "@/types/global";
 
 
 
@@ -12,7 +16,7 @@ const ProjectHome = () => {
 
     const { data, error, isLoading } = useGetAllProjectsQuery(undefined);
 
-    // const [deleteblog] = useDeleteBlogMutation();
+    const [deleteProject] = useDeletePeojectMutation();
 
 
     const projects = data?.data
@@ -32,6 +36,45 @@ const ProjectHome = () => {
         const date = new Date(dateString);
         return date.toLocaleDateString();
     };
+
+
+    // Blog Delete Function
+    const handleDeleteProject = async (project: any) => {
+        // console.log(project._id);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+
+                    await deleteProject({ id: project._id }).unwrap();
+                    // console.log(blogs);
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "The project has been deleted.",
+                        icon: "success"
+                    });
+                } catch (error) {
+                    console.error("Delete Error:", error);
+                    toast.error((error as TExtraError)?.data?.message || 'Failed to delete project');
+                    Swal.fire({
+                        title: "Error!",
+                        text: (error as TExtraError)?.data?.message || 'Failed to delete project',
+                        icon: "error"
+                    });
+                }
+            }
+        });
+    };
+
 
     return (
         <div>
