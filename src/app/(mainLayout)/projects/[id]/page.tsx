@@ -1,22 +1,39 @@
 import Image from "next/image";
+import Link from "next/link";
 
 
 const ProjectDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
     const { id } = await params;
 
-    console.log(id);
+    // console.log(id);
 
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL_SERVER}/api/projects/${id}`);
     const project = await res.json();
 
-    console.log(project);
+    const pro = project?.data
 
+    console.log(pro);
+
+    // Date formatting function
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const options: Intl.DateTimeFormatOptions = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true 
+        };
+        return date.toLocaleString('en-US', options);
+    };
 
     return (
         <div>
-            <div className="mt-6 flex p-4 mx-auto">
+            <div className="mt-6 flex p-4 justify-center items-center">
 
                 <section className="overflow-hidden  sm:grid sm:grid-cols-2 border-2 p-4 rounded-lg">
 
@@ -24,29 +41,65 @@ const ProjectDetailPage = async ({ params }: { params: Promise<{ id: string }> }
                         alt="imag"
                         height={500}
                         width={500}
-                        src="https://images.unsplash.com/photo-1464582883107-8adf2dca8a9f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                        src={pro?.image}
                         className="h-56 w-full object-cover sm:h-full rounded-lg"
                     />
 
                     <div className="p-8 md:p-12 lg:px-16 lg:py-24">
                         <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-                            <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit
+
+                            <h2 className="text-2xl font-bold  md:text-3xl">
+                                {pro?.title}
                             </h2>
 
-                            <p className="hidden text-gray-500 md:mt-4 md:block">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, egestas tempus tellus etiam
-                                sed. Quam a scelerisque amet ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-                                quisque ut interdum tincidunt duis.
+                            <p className=" text-start  md:mt-4  font-semibold"> Description :
+                                <span className="ml-2 font-normal">{pro?.descriptions}</span>
+                            </p>
+                            <p className=" text-start  md:mt-4  font-semibold"> CreatedAt :
+                                <span className="ml-2 font-normal">{formatDate(pro?.createdAt)}</span>
+                            </p>
+                            <p className=" text-start  md:mt-4  font-semibold"> UpdatedAt :
+                                <span className="ml-2 font-normal">{formatDate(pro?.updatedAt)}</span>
                             </p>
 
+                            <div className="grid gap-4 mt-4 lg:grid-cols-3 md:grid-cols-2 ">
+                                {/* Base - Right */}
+
+                                <Link target="_blank"
+                                    className="inline-block rounded-sm bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:rotate-2 focus:ring-3 focus:outline-hidden"
+                                    href={pro?.liveLink}
+                                >
+                                    Live Demo
+                                </Link>
+
+                                {/* Border - Right */}
+
+                                <Link
+                                    target="_blank"
+                                    className="inline-block rounded-sm border border-current px-8 py-3 text-sm font-medium text-indigo-600 transition hover:scale-110 hover:rotate-2 focus:ring-3 focus:outline-hidden"
+                                    href={pro?.githubClient}
+                                >
+                                    Github Client
+                                </Link>
+
+                                {/* Base - Left */}
+
+                                <Link
+                                    target="_blank"
+                                    className="inline-block rounded-sm bg-indigo-600 px-8 py-3 text-sm font-medium text-white transition hover:scale-110 hover:-rotate-2 focus:ring-3 focus:outline-hidden"
+                                    href={pro?.githubServer}
+                                >
+                                    Github Server
+                                </Link>
+                            </div>
+
                             <div className="mt-4 md:mt-8">
-                                <a
-                                    href="#"
+                                <Link
+                                    href="/projects"
                                     className="inline-block rounded-sm bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-emerald-700 focus:ring-3 focus:ring-yellow-400 focus:outline-hidden"
                                 >
-                                    Get Started Today
-                                </a>
+                                    Back
+                                </Link>
                             </div>
                         </div>
                     </div>
