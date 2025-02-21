@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#  Design Role
 
-## Getting Started
+This is a fully functional portfolio website built with **Next.js**, **TypeScript**, and **Tailwind CSS**. It includes public pages accessible to all users and a private dashboard for authenticated users to manage blogs, projects, and messages.
 
-First, run the development server:
+## Project Link
+- **Website Live Link**: <a href="https://ridenest.vercel.app" target="_blank" rel="noopener noreferrer">Design Role</a>
+- **GitHub Server Repo**: <a href="https://github.com/developerFarukk/design-role-server.git" target="_blank" rel="noopener noreferrer">DesignRole Server</a>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **VIDIO Review Link**: <a href="https://drive.google.com/file/d/1IsGVsPrFx5H8lbmnGJ4HgKfblrYOH4hI/view?usp=sharing" target="_blank" rel="noopener noreferrer">Video Presentation</a>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Public Pages (Accessible to All Users)
+- **Home Page (`/`)**
+  - Display portfolio introduction.
+  - See my skills.
+  - My featured projects.
+  - Resume download button.
+- **Projects Page (`/projects`)**
+  - Clicking on a project opens a detailed page (`/projects/[id]`).
+- **Blog Page (`/blog`)**
+  - Clicking on a blog opens a detailed blog page (`/blog/[id]`).
+- **Contact Page (`/contact`)**
+  - Simple contact form (name, email, message).
+  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Dashboard (Only for Logged-in Users)
+- **Login (`/dashboard`)**
+  - Only authenticated users can access the dashboard.
+- **Blog Management (`/dashboard/blogs`)**
+  - Create, read, edit, or delete blog posts.
+- **Project Management (`/dashboard/projects`)**
+  - CRUD operations (Create, Read, Update, Delete) for projects.
 
-## Learn More
+- **Message Management (`/dashboard/messages`)**
+  - View messages submitted from the contact form.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technical Requirements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontend
+- Built with **Next.js** and **TypeScript**.
+- Styled using **Tailwind CSS**.
+- Dynamic routes for projects and blogs (`/projects/[id]`, `/blog/[id]`).
 
-## Deploy on Vercel
+### Backend
+- Simple backend using **Node.js** and **Express**.
+- Manages Blog, Project, and other essential data.
+- Backend API is publicly accessible.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Database
+- **MongoDB** for storing projects, blogs, and messages.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+---
+
+## Installation
+
+### Prerequisites
+- Node.js (v18 or higher)
+- MongoDB (for database)
+- GitHub, Google, or any other social login credentials (for authentication)
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/developerFarukk/design-role-client.git
+   cd portfolio-website
+
+   npm install
