@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
     ],
     pages: {
         signIn: "/login",
-        error: "/error",
+        // error: "/error",
     },
     secret: process.env.NEXTAUTH_SECRET,
 }

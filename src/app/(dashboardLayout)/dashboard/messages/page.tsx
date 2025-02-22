@@ -1,4 +1,5 @@
 
+
 "use client"
 
 import { deleteMessage } from "@/redux/features/message/messageSlice";
@@ -6,16 +7,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { RootState } from "@/redux/store";
 import { Trash2 } from "lucide-react";
 
-
 const MessagesPage = () => {
 
     const messages = useAppSelector((state: RootState) => state.messages);
     const massage = messages.messages;
 
     const dispatch = useAppDispatch();
-
-
-
 
     return (
         <div>
@@ -25,9 +22,9 @@ const MessagesPage = () => {
                 </h1>
             </header>
 
-            <div className=' p-2 '>
+            <section className=' p-2 '>
                 {massage.length > 0 ?
-                    (massage.map((massage) => <>
+                    (massage.map((massage) => (
                         <div className="border-2 border-blue-600 px-5 py-3 rounded-md mb-8" key={massage.id}>
                             <div className="flow-root rounded-lg border  py-3 shadow-xs p-2">
 
@@ -62,7 +59,7 @@ const MessagesPage = () => {
 
                             </div>
                         </div>
-                    </>))
+                    )))
                     :
                     (
                         <div className="text-center ">
@@ -71,7 +68,7 @@ const MessagesPage = () => {
                     )
                 }
 
-            </div>
+            </section>
         </div>
     );
 };
