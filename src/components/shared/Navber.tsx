@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 "use client";
@@ -11,6 +12,7 @@ import { FaSun, FaMoon } from "react-icons/fa";
 import iconss from "../../app/favicon.ico";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 
 export type UserProps = {
   user?: {
@@ -36,6 +38,21 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
       el.removeAttribute('fdprocessedid');
     });
   }, []);
+
+
+  const handleSignOut = async () => {
+    try {
+      await signOut()
+      toast.success("LogOut Successful!", {
+        duration: 1000,
+      });
+    } catch (error) {
+      toast.error("LogOut Failed!", {
+        duration: 1000,
+      });
+    }
+  };
+
 
   return (
     <nav className="bg-white border-gray-200 py-2.5 dark:bg-gray-900 rounded-2xl">
@@ -101,7 +118,10 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
             {
               session?.user ?
                 <li className="lg:hidden">
-                  <button onClick={() => signOut()}>
+                  <button
+                    // onClick={() => signOut()}
+                    onClick={handleSignOut}
+                  >
                     <Link
                       href="/login"
                       className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
@@ -134,7 +154,8 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
           {
             session?.user ?
               <button
-                onClick={() => signOut()}
+                onClick={handleSignOut}
+              // onClick={() => signOut()}
               >
                 <Link
                   href="/"

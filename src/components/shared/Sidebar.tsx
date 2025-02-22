@@ -1,4 +1,4 @@
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 
 "use client";
@@ -12,6 +12,7 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { useTheme } from "next-themes";
 import { UserProps } from "./Navber";
 import { signOut } from "next-auth/react";
+import { toast } from "sonner";
 
 
 const isNotNull = <T,>(item: T | null): item is T => item !== null;
@@ -22,6 +23,19 @@ const Sidebar = ({ session }: { session: UserProps | null }) => {
     const pathname = usePathname();
     const { theme, setTheme } = useTheme();
 
+
+    const handleSignOut = async () => {
+        try {
+            await signOut()
+            toast.success("LogOut Successful!", {
+                duration: 1000,
+            });
+        } catch (error) {
+            toast.error("LogOut Failed!", {
+                duration: 1000,
+            });
+        }
+    };
 
 
     return (
@@ -98,7 +112,8 @@ const Sidebar = ({ session }: { session: UserProps | null }) => {
                         <div className="flex gap-3">
                             <div><CiLogout className="text-white h-6 w-6" /></div>
                             <button
-                                onClick={() => signOut()}
+                                // onClick={() => signOut()}
+                                onClick={handleSignOut}
                                 className="text-white hidden sm:block"
                             >
                                 LogOut

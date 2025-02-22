@@ -10,27 +10,37 @@ import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
 const Login = () => {
-  
+
     const handleGoogleLogin = async () => {
         try {
             await signIn("google", {
-                callbackUrl: `{${process.env.NEXT_PUBLIC_BASEURL}}`,
+                callbackUrl: "https://design-role-1.vercel.app",
             });
-            toast.success("Google Login Successful!");
+            toast.success("Google Login Successful!", {
+                duration: 1000,
+            });
         } catch (error) {
-            toast.error("Google Login Failed!");
+            toast.error("Google Login Failed!", {
+                duration: 1000,
+            });
         }
     };
 
-    
+
     const handleGithubLogin = async () => {
         try {
             await signIn("github", {
-                callbackUrl: `{${process.env.NEXT_PUBLIC_BASEURL}}`,
+                // callbackUrl: `{${process.env.NEXT_PUBLIC_BASEURL}}`,
+                // callbackUrl: "https://design-role-1.vercel.app",
+                callbackUrl: "http://localhost:3000",
             });
-            toast.success("GitHub Login Successful!");
+            toast.success("GitHub Login Successful!", {
+                duration: 1000,
+            });
         } catch (error) {
-            toast.error("GitHub Login Failed!");
+            toast.error("GitHub Login Failed!", {
+                duration: 1000,
+            });
         }
     };
 
@@ -75,7 +85,7 @@ const Login = () => {
                     <div className="flex items-center justify-between gap-2 mt-10">
                         <div>
                             <div className="flex gap-6">
-                    
+
                                 <button
                                     onClick={handleGoogleLogin}
                                     className="flex gap-3 cursor-pointer text-white font-semibold bg-gradient-to-r from-fuchsia-500 to-green-500 px-7 py-3 rounded-full border border-gray-600 hover:scale-105 duration-200 hover:text-yellow-400 hover:border-gray-800 hover:from-slate-400 hover:to-blue-500"
@@ -108,7 +118,7 @@ const Login = () => {
                                     Google
                                 </button>
 
-                   
+
                                 <button
                                     onClick={handleGithubLogin}
                                     className="flex gap-3 cursor-pointer text-white font-semibold bg-gradient-to-r from-blue-500 to-green-500 px-7 py-3 rounded-full border border-gray-600 hover:scale-105 duration-200 hover:text-yellow-400 hover:border-gray-800 hover:from-green-500 hover:to-blue-500"
