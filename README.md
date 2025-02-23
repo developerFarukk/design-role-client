@@ -3,10 +3,10 @@
 This is a fully functional portfolio website built with **Next.js**, **TypeScript**, and **Tailwind CSS**. It includes public pages accessible to all users and a private dashboard for authenticated users to manage blogs, projects, and messages.
 
 ## Project Link
-- **Website Live Link**: <a href="https://ridenest.vercel.app" target="_blank" rel="noopener noreferrer">Design Role</a>
+- **Website Live Link**: <a href="https://design-role-1.vercel.app" target="_blank" rel="noopener noreferrer">Design Role</a>
 - **GitHub Server Repo**: <a href="https://github.com/developerFarukk/design-role-server.git" target="_blank" rel="noopener noreferrer">DesignRole Server</a>
 
-- **VIDIO Review Link**: <a href="https://drive.google.com/file/d/1IsGVsPrFx5H8lbmnGJ4HgKfblrYOH4hI/view?usp=sharing" target="_blank" rel="noopener noreferrer">Video Presentation</a>
+- **VIDIO Review Link**: <a href="https://drive.google.com/file/d/1olFzGxBlTL4LIV3D2UTlu_K__oQVug3V/view?usp=sharing" target="_blank" rel="noopener noreferrer">Video Presentation</a>
 
 ## Features
 
@@ -42,6 +42,7 @@ This is a fully functional portfolio website built with **Next.js**, **TypeScrip
 ### Frontend
 - Built with **Next.js** and **TypeScript**.
 - Styled using **Tailwind CSS**.
+- Advance Technology: **Redux, Cloundery**
 - Dynamic routes for projects and blogs (`/projects/[id]`, `/blog/[id]`).
 
 ### Backend
