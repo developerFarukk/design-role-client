@@ -31,8 +31,8 @@ const Login = () => {
         try {
             await signIn("github", {
                 // callbackUrl: `{${process.env.NEXT_PUBLIC_BASEURL}}`,
-                // callbackUrl: "https://design-role-1.vercel.app",
-                callbackUrl: "http://localhost:3000",
+                callbackUrl: "https://design-role-1.vercel.app",
+                // callbackUrl: "http://localhost:3000",
             });
             toast.success("GitHub Login Successful!", {
                 duration: 1000,
