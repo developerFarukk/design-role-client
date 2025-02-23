@@ -1,8 +1,6 @@
-
-
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 
 "use client";
 
@@ -17,48 +15,73 @@ import { toast } from 'sonner';
 const CreateProject = () => {
     const [createProject] = useCreateProjectMutation();
     const [isOpen, setIsOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TProject>({
         mode: "onBlur",
     });
 
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-        const projectData = {
-            project: {
-                title: data.title,
-                descriptions: data.descriptions,
-                liveLink: data.liveLink,
-                githubClient: data.githubClient,
-                githubServer: data.githubServer,
-            }
+        setIsLoading(true); 
+
+     
+        const projectData: Partial<TProject> = {
+            title: data.title,
+            descriptions: data.descriptions,
+            liveLink: data.liveLink,
+            githubClient: data.githubClient,
+            githubServer: data.githubServer,
         };
 
-        // console.log(projectData);
-
-
-        const formData = new FormData();
-        formData.append('data', JSON.stringify(projectData));
-        formData.append('file', data.image[0]);
-
-        // console.log("Form Data:", Object.fromEntries(formData));
-
-        const toastId = toast.loading('Creating...');
-
         try {
-            const res = (await createProject(formData)) as TResponse<any>;
-            // console.log(res);
+
+            if (data.image && data.image[0]) {
+                const imageFile = data.image[0];
+
+           
+                const formData = new FormData();
+                formData.append('file', imageFile);
+                formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!);
+
+                const cloudinaryResponse = await fetch(
+                    `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
+
+
+                const cloudinaryData = await cloudinaryResponse.json();
+
+                console.log(cloudinaryData.secure_url);
+
+                if (cloudinaryData.secure_url) {
+                    projectData.image = cloudinaryData.secure_url; 
+                }
+            }
+
+            // API রিকোয়েস্ট পাঠান
+            const res = (await createProject(projectData)) as TResponse<any>;
+
+            console.log(res);
+
 
             if (res.error) {
-                toast.error(res.error.data.message, { id: toastId });
+                toast.error(res.error.data.message);
             } else {
-                toast.success('Project created Successfully', { id: toastId });
+                toast.success('Project created Successfully');
                 reset();
                 close();
             }
         } catch (err) {
-            toast.error('Something went wrong', { id: toastId });
+            toast.error('Something went wrong');
+        } finally {
+            setIsLoading(false); 
         }
     };
+
 
     const open = () => setIsOpen(true);
     const close = () => setIsOpen(false);
@@ -74,7 +97,7 @@ const CreateProject = () => {
             </button>
 
             <Dialog open={isOpen} onClose={close} as="div" className="relative z-10">
-                <div className="fixed inset-0  backdrop-blur-lg" aria-hidden="true" />
+                <div className="fixed inset-0 backdrop-blur-lg" aria-hidden="true" />
                 <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
                     <div className="flex min-h-full items-center justify-center p-4">
                         <DialogPanel className="w-full max-w-md rounded-xl border-2 p-6">
@@ -83,6 +106,7 @@ const CreateProject = () => {
                             </DialogTitle>
 
                             <form onSubmit={handleSubmit(onSubmit)}>
+
                                 {/* Project Title */}
                                 <label className="block mt-2 text-sm/6">
                                     <span className="mb-1">Project Title</span>
@@ -102,11 +126,16 @@ const CreateProject = () => {
                                 {/* Project Image */}
                                 <label className="block mt-2 text-sm/6">
                                     <span className="mb-1">Upload Project Image</span>
-                                    <input
-                                        type="file"
-                                        className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
-                                        {...register("image", { required: "Image is required" })}
-                                    />
+
+                                    {
+                                        isLoading ? "uploading..." : <input
+                                            type="file"
+                                            className="block w-full p-2 border-2 border-blue-200 rounded-md shadow-sm focus:ring focus:ring-opacity-75"
+                                            {...register("image", { required: "Image is required" })}
+                                        />
+                                    }
+
+
                                     <div className="flex justify-end mt-1">
                                         <label className={errors.image ? "text-red-700 text-sm" : "hidden"}>
                                             {errors.image?.message}
@@ -172,8 +201,9 @@ const CreateProject = () => {
                                     <Button
                                         type="submit"
                                         className="inline-flex w-full justify-center items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white"
+                                        disabled={isLoading} 
                                     >
-                                        Submit
+                                        {isLoading ? 'Creating...' : 'Submit'}
                                     </Button>
                                 </div>
                             </form>
