@@ -62,7 +62,6 @@ const CreateProject = () => {
                 }
             }
 
-            // API রিকোয়েস্ট পাঠান
             const res = (await createProject(projectData)) as TResponse<any>;
 
             console.log(res);
