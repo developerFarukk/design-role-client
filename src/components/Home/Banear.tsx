@@ -15,7 +15,7 @@ const Banear = () => {
     const fileUrl = "/resume.pdf";
     const fileName = "resume";
 
-    // একটি লিংক তৈরি করুন
+    
     const link = document.createElement("a");
     link.href = fileUrl;
     link.download = fileName;
